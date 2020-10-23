@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Update your account{% endblock %}
+
+{% block content %}
+    <div class="text-center container-sm">
+        <br><br><br>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-center">
+                    <div class="media">
+                         <img class="rounded-circle account-img" style="width:200px; height:200px; object-fit: cover;" src="{{ url_for('static',filename='profile_pics/'+image)}}">
+                    </div>
+                </div>
+                <br>
+                <form class="form-signin" method=post enctype="multipart/form-data">
+
+                    <h1 class="h3 mb-3 font-weight-normal">Update your account</h1>
+
+                    <input class="form-control" name="username" id="username" value="{{ request.form['username'] or account['username'] }}" placeholder="Username" required>
+                    <input class="form-control" name="company_name" id="company_name"  value="{{ request.form['company_name'] or account['company_name'] }}" placeholder="Company Name" required>
+                    <input class="form-control" name="contact" id="contact" value="{{ request.form['contact'] or account['contact'] }}" placeholder="Contact" required>
+                    <input class="form-control" name="contact_phone" id="contact_phone" value="{{ request.form['contact_phone'] or account['contact_phone'] }}" placeholder="Contact Phone" required>
+                    <input class="form-control" name="contact_email" id="contact_email" value="{{ request.form['contact_email'] or account['contact_email'] }}" placeholder="Contact Email" required>
+                    <input class="form-control" name="address" id="address" value="{{ request.form['address'] or account['address'] }}" placeholder="Address" required>
+                    <br>
+                    <input  type=file name=file>
+                    <br>
+                    <br>
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Update">
+                </form>
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+{% endblock %}

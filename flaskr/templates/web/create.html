@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}New Post{% endblock %}
+
+{% block content %}
+
+    <br>
+    <div class="d-flex justify-content-center">
+        <div class="media">
+             <img class="rounded-circle account-img" style="width:200px; height:200px; " src="{{ url_for('static',filename='profile_pics/'+photo)}}">
+        </div>
+    </div>
+    <br>
+
+    <br>
+    <h1 class="h3 mb-3 font-weight-normal">New Post</h1>
+    <br>
+
+    <div class="text-center container-sm">
+        <form class="form-signin" method="post" enctype="multipart/form-data">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" name="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" >
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+            </div>
+
+            <br>
+
+            <input class="form-control" name="title" id="title" value="{{ request.form['title'] }}" placeholder="Title" required>
+
+            <br>
+
+            <div class="form-group">
+                <select name="category" class="selectpicker form-control">
+                    <option hidden >Category:</option>
+                    {% for o in data %}
+                        <option value="{{ o }}">{{ o }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <textarea class="form-control" rows="5" name="description" id="description" placeholder="Describe your product">{{ request.form['description'] }}</textarea>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <select name="condition" class="selectpicker form-control">
+                    <option hidden >Select condition of your product</option>
+                    {% for o in condition_options %}
+                        <option value="{{ o }}">{{ o }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <br>
+
+            <input class="form-control" name="price" id="price" value="{{ request.form['price'] }}" placeholder="Set a price [EUR]" required>
+
+            <br>
+
+            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Save">
+
+            <br>
+            <br>
+
+        </form>
+    </div>
+{% endblock %}

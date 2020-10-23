@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="container-sm">
+        <br>
+        <div class="row">
+            <div class="col-sm-2">
+                <form  action="" method="post">
+                    <select class="" name="test">
+                        <option value="latest_post">Latest posts</option>
+                        <option value="lower_price">Lower price</option>
+                        <option value="higher_price">Higher price</option>
+                    </select>
+                    <br>
+                    <select class="" name="cates">
+                        <option value="0">All</option>
+                        <option value="Switches">Switches</option>
+                        <option value="Routers">Routers</option>
+                        <option value="Servers">Servers</option>
+                    </select>
+                    <br>
+                    <input class='btn btn-success' type="submit" value="Filter">
+                </form>
+            </div>
+            <div class="col-sm-8">
+                <h1> {{page_title}} </h1>
+            </div>
+            <div class="col-sm-2">
+                {% if g.user %}
+                    <a class="btn btn-secondary" href="{{ url_for('web.create') }}">New Post</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="container-sm">
+    <br>
+    <br>
+    {% if posts|length<1 %}
+        <h3 style="margin-left: 190px">No posts yet</h3>
+    {% endif %}
+    {% for post in posts %}
+        <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-4">
+                <div>
+                    <h3>{{ post['title'] }}</h3>
+                    <div class="about">
+                        {{ post['created'].strftime('%Y-%m-%d') }}
+                    </div>
+                    <div>
+                        <strong>Price: {{ post['price'] }} EUR</strong>
+                    </div>
+                    
+                    <div>
+                    {{ post['condition'] }} 
+                    </div>
+                     <div>
+                      <strong> {{ post['category'] }} </strong>
+                    </div>
+                           {% if g.user['id'] == post['author_id'] %}
+                             <a class="action" href="{{ url_for('web.update', id=post['id']) }}">Edit</a>
+                            {% endif %}
+                    <br>
+                    <br>
+                    <a class="btn btn-primary" href="{{ url_for('web.post', id=post['id']) }}">Click on post</a>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="d-flex justify-content-center">
+                    <div>
+                         <img style="width:200px; height:200px; object-fit: cover;" src="{{  url_for('static',filename='profile_pics/'+post['image_file'])}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+        <br>
+    {% endfor %}
+</div>
+{% endblock %}

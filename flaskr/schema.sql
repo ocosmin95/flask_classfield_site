@@ -1,0 +1,27 @@
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS post;
+
+CREATE TABLE user (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT UNIQUE NOT NULL,
+  company_name TEXT UNIQUE NOT NULL,
+  contact TEXT UNIQUE NOT NULL,
+  contact_phone TEXT UNIQUE NOT NULL,
+  contact_email TEXT UNIQUE NOT NULL,
+  address TEXT UNIQUE NOT NULL,
+  logo TEXT DEFAULT 'default.jpg',
+  password TEXT NOT NULL
+);
+
+CREATE TABLE post (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  author_id INTEGER NOT NULL,
+  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  title TEXT NOT NULL,
+  category TEXT NOT NULL,
+  description TEXT NOT NULL,
+  image_file TEXT,
+  price INTEGER NOT NULL,
+  condition INTEGER NOT NULL,
+  FOREIGN KEY (author_id) REFERENCES user (id)
+);

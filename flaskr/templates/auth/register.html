@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+<h1>{% block title %}Register{% endblock %}</h1>
+
+{% block content %}
+    <div class="text-center container-sm">
+        <br><br><br>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+
+            <form class="form-signin" method=post enctype="multipart/form-data"'>
+
+                <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+
+                <input class="form-control" name="username" id="username" placeholder="Username" required>
+                <input class="form-control" name="company_name" id="company_name" placeholder="Company Name" required>
+                <input class="form-control" name="contact" id="contact" placeholder="Contact" required>
+                <input class="form-control" name="contact_phone" id="contact_phone" placeholder="Contact Phone" required>
+                <input class="form-control" name="contact_email" id="contact_email" placeholder="Contact Email" required>
+                <input class="form-control" name="address" id="address" placeholder="Address" required>
+                <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
+                <br><br>
+                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Register">
+                <p class="mt-5 mb-3 text-muted">&copy; Iulian Oancea</p>
+            </form>
+
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+{% endblock %}
